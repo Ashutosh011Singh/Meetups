@@ -88,33 +88,15 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ 3:
+/***/ 0:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__("RNiq");
-
-
-/***/ }),
-
-/***/ "4Q3z":
-/***/ (function(module, exports) {
-
-module.exports = require("next/router");
-
-/***/ }),
-
-/***/ "A3pG":
-/***/ (function(module, exports) {
-
-// Exports
-module.exports = {
-	"list": "MeetupList_list__1iafn"
-};
+module.exports = __webpack_require__("kqZg");
 
 
 /***/ }),
@@ -126,169 +108,12 @@ module.exports = require("react/jsx-runtime");
 
 /***/ }),
 
-/***/ "RNiq":
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-// ESM COMPAT FLAG
-__webpack_require__.r(__webpack_exports__);
-
-// EXPORTS
-__webpack_require__.d(__webpack_exports__, "getStaticProps", function() { return /* binding */ getStaticProps; });
-
-// EXTERNAL MODULE: external "react/jsx-runtime"
-var jsx_runtime_ = __webpack_require__("F5FC");
-
-// EXTERNAL MODULE: external "next/head"
-var head_ = __webpack_require__("xnum");
-var head_default = /*#__PURE__*/__webpack_require__.n(head_);
-
-// EXTERNAL MODULE: external "mongodb"
-var external_mongodb_ = __webpack_require__("ykE2");
-
-// EXTERNAL MODULE: external "next/router"
-var router_ = __webpack_require__("4Q3z");
-
-// EXTERNAL MODULE: ./components/ui/Card.js
-var Card = __webpack_require__("leqP");
-
-// EXTERNAL MODULE: ./components/meetups/MeetupItem.module.css
-var MeetupItem_module = __webpack_require__("RPSF");
-var MeetupItem_module_default = /*#__PURE__*/__webpack_require__.n(MeetupItem_module);
-
-// CONCATENATED MODULE: ./components/meetups/MeetupItem.js
-
-
-
-
-
-
-function MeetupItem(props) {
-  const router = Object(router_["useRouter"])();
-
-  function showDetailsHandler() {
-    router.push("/" + props.id);
-  }
-
-  return /*#__PURE__*/Object(jsx_runtime_["jsx"])("li", {
-    className: MeetupItem_module_default.a.item,
-    children: /*#__PURE__*/Object(jsx_runtime_["jsxs"])(Card["a" /* default */], {
-      children: [/*#__PURE__*/Object(jsx_runtime_["jsx"])("div", {
-        className: MeetupItem_module_default.a.image,
-        children: /*#__PURE__*/Object(jsx_runtime_["jsx"])("img", {
-          src: props.image,
-          alt: props.title
-        })
-      }), /*#__PURE__*/Object(jsx_runtime_["jsxs"])("div", {
-        className: MeetupItem_module_default.a.content,
-        children: [/*#__PURE__*/Object(jsx_runtime_["jsx"])("h3", {
-          children: props.title
-        }), /*#__PURE__*/Object(jsx_runtime_["jsx"])("address", {
-          children: props.address
-        })]
-      }), /*#__PURE__*/Object(jsx_runtime_["jsx"])("div", {
-        className: MeetupItem_module_default.a.actions,
-        children: /*#__PURE__*/Object(jsx_runtime_["jsx"])("button", {
-          onClick: showDetailsHandler,
-          children: "Show Details"
-        })
-      })]
-    })
-  });
-}
-
-/* harmony default export */ var meetups_MeetupItem = (MeetupItem);
-// EXTERNAL MODULE: ./components/meetups/MeetupList.module.css
-var MeetupList_module = __webpack_require__("A3pG");
-var MeetupList_module_default = /*#__PURE__*/__webpack_require__.n(MeetupList_module);
-
-// CONCATENATED MODULE: ./components/meetups/MeetupList.js
-
-
-
-
-function MeetupList(props) {
-  return /*#__PURE__*/Object(jsx_runtime_["jsx"])("ul", {
-    className: MeetupList_module_default.a.list,
-    children: props.meetups.map(meetup => /*#__PURE__*/Object(jsx_runtime_["jsx"])(meetups_MeetupItem, {
-      id: meetup.id,
-      image: meetup.image,
-      title: meetup.title,
-      address: meetup.address
-    }, meetup.id))
-  });
-}
-
-/* harmony default export */ var meetups_MeetupList = (MeetupList);
-// EXTERNAL MODULE: external "react"
-var external_react_ = __webpack_require__("cDcd");
-
-// CONCATENATED MODULE: ./pages/index.js
-
-
-
- // our-domain.com/
-
-
-
-
-function HomePage(props) {
-  return /*#__PURE__*/Object(jsx_runtime_["jsxs"])(external_react_["Fragment"], {
-    children: [/*#__PURE__*/Object(jsx_runtime_["jsxs"])(head_default.a, {
-      children: [/*#__PURE__*/Object(jsx_runtime_["jsx"])("title", {
-        children: "React Meetups"
-      }), /*#__PURE__*/Object(jsx_runtime_["jsx"])("meta", {
-        name: "description",
-        content: "Browse a huge list of highly active React meetups!"
-      })]
-    }), /*#__PURE__*/Object(jsx_runtime_["jsx"])(meetups_MeetupList, {
-      meetups: props.meetups
-    })]
-  });
-} // export async function getServerSideProps(context) {
-//   const req = context.req;
-//   const res = context.res;
-//   // fetch data from an api
-//   return {
-//     props: {
-//       meetups: DUMMY_MEETUPS,
-//     },
-//   };
-// }
-
-
-async function getStaticProps() {
-  //fetch data from an api
-  const client = await external_mongodb_["MongoClient"].connect("mongodb+srv://admin-Ashutosh:AshutoshSingh@cluster0.nkmln.mongodb.net/meetups?retryWrites=true&w=majority");
-  const db = client.db();
-  const meetupsCollection = db.collection("meetups");
-  const meetups = await meetupsCollection.find().toArray();
-  client.close();
-  return {
-    props: {
-      meetups: meetups.map(meetup => ({
-        title: meetup.title,
-        address: meetup.address,
-        image: meetup.image,
-        id: meetup._id.toString()
-      }))
-    },
-    revalidate: 1
-  };
-}
-/* harmony default export */ var pages = __webpack_exports__["default"] = (HomePage);
-
-/***/ }),
-
-/***/ "RPSF":
+/***/ "YEck":
 /***/ (function(module, exports) {
 
 // Exports
 module.exports = {
-	"item": "MeetupItem_item__3siMU",
-	"image": "MeetupItem_image__13rAP",
-	"content": "MeetupItem_content__3uEkT",
-	"actions": "MeetupItem_actions__LvT9B"
+	"detail": "MeetupDetail_detail__C_8IT"
 };
 
 
@@ -301,36 +126,125 @@ module.exports = require("react");
 
 /***/ }),
 
-/***/ "leqP":
+/***/ "kqZg":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("F5FC");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Card_module_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("rQAc");
-/* harmony import */ var _Card_module_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_Card_module_css__WEBPACK_IMPORTED_MODULE_1__);
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, "getStaticPaths", function() { return /* binding */ getStaticPaths; });
+__webpack_require__.d(__webpack_exports__, "getStaticProps", function() { return /* binding */ getStaticProps; });
+
+// EXTERNAL MODULE: external "react/jsx-runtime"
+var jsx_runtime_ = __webpack_require__("F5FC");
+
+// EXTERNAL MODULE: external "react"
+var external_react_ = __webpack_require__("cDcd");
+
+// EXTERNAL MODULE: external "next/head"
+var head_ = __webpack_require__("xnum");
+var head_default = /*#__PURE__*/__webpack_require__.n(head_);
+
+// EXTERNAL MODULE: external "mongodb"
+var external_mongodb_ = __webpack_require__("ykE2");
+
+// EXTERNAL MODULE: ./components/meetups/MeetupDetail.module.css
+var MeetupDetail_module = __webpack_require__("YEck");
+var MeetupDetail_module_default = /*#__PURE__*/__webpack_require__.n(MeetupDetail_module);
+
+// CONCATENATED MODULE: ./components/meetups/MeetupDetail.js
 
 
 
-function Card(props) {
-  return /*#__PURE__*/Object(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__["jsx"])("div", {
-    className: _Card_module_css__WEBPACK_IMPORTED_MODULE_1___default.a.card,
-    children: props.children
+
+function MeetupDetail(props) {
+  return /*#__PURE__*/Object(jsx_runtime_["jsxs"])("section", {
+    className: MeetupDetail_module_default.a.detail,
+    children: [/*#__PURE__*/Object(jsx_runtime_["jsx"])("img", {
+      src: props.image,
+      alt: props.title
+    }), /*#__PURE__*/Object(jsx_runtime_["jsx"])("h1", {
+      children: props.title
+    }), /*#__PURE__*/Object(jsx_runtime_["jsx"])("address", {
+      children: props.address
+    }), /*#__PURE__*/Object(jsx_runtime_["jsx"])("p", {
+      children: props.description
+    })]
   });
 }
 
-/* harmony default export */ __webpack_exports__["a"] = (Card);
+/* harmony default export */ var meetups_MeetupDetail = (MeetupDetail);
+// CONCATENATED MODULE: ./pages/[meetupId]/index.js
 
-/***/ }),
 
-/***/ "rQAc":
-/***/ (function(module, exports) {
 
-// Exports
-module.exports = {
-	"card": "Card_card__3KSLO"
-};
 
+
+
+
+function MeetupDetails(props) {
+  return /*#__PURE__*/Object(jsx_runtime_["jsxs"])(external_react_["Fragment"], {
+    children: [/*#__PURE__*/Object(jsx_runtime_["jsxs"])(head_default.a, {
+      children: [/*#__PURE__*/Object(jsx_runtime_["jsx"])("title", {
+        children: props.meetupData.title
+      }), /*#__PURE__*/Object(jsx_runtime_["jsx"])("meta", {
+        name: "description",
+        content: props.meetupData.description
+      })]
+    }), /*#__PURE__*/Object(jsx_runtime_["jsx"])(meetups_MeetupDetail, {
+      image: props.meetupData.image,
+      title: props.meetupData.title,
+      address: props.meetupData.address,
+      description: props.meetupData.description
+    })]
+  });
+}
+
+async function getStaticPaths() {
+  const client = await external_mongodb_["MongoClient"].connect("mongodb+srv://admin-Ashutosh:AshutoshSingh@cluster0.nkmln.mongodb.net/meetups?retryWrites=true&w=majority");
+  const db = client.db();
+  const meetupsCollection = db.collection("meetups");
+  const meetups = await meetupsCollection.find({}, {
+    _id: 1
+  }).toArray();
+  client.close();
+  return {
+    fallback: false,
+    paths: meetups.map(meetup => ({
+      params: {
+        meetuId: meetup._id.toString()
+      }
+    }))
+  };
+}
+async function getStaticProps(context) {
+  //fetch data for a single meetup
+  const meetupId = context.params.meetupId;
+  const client = await external_mongodb_["MongoClient"].connect("mongodb+srv://admin-Ashutosh:AshutoshSingh@cluster0.nkmln.mongodb.net/meetups?retryWrites=true&w=majority");
+  const db = client.db();
+  const meetupsCollection = db.collection("meetups");
+  const meetups = await meetupsCollection.find({}, {
+    _id: 1
+  }).toArray();
+  const selectedMeetup = await meetupsCollection.findOne({
+    _id: Object(external_mongodb_["ObjectId"])(meetupId)
+  });
+  client.close();
+  return {
+    props: {
+      meetupData: {
+        id: selectedMeetup._id.toString(),
+        title: selectedMeetup.title,
+        address: selectedMeetup.address,
+        image: selectedMeetup.image,
+        description: selectedMeetup.description
+      }
+    }
+  };
+}
+/* harmony default export */ var _meetupId_ = __webpack_exports__["default"] = (MeetupDetails);
 
 /***/ }),
 
